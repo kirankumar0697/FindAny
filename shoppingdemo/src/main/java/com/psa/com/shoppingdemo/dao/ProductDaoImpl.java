@@ -32,9 +32,12 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product findByItemid(int itemid) {
-		// TODO Auto-generated method stub
-		return null;
+	public Product findByProductId(int prodId) {
+		
+		Session currentSession = entityManager.unwrap(Session.class);		
+		Product product=currentSession.get(Product.class, prodId);
+		return product;
+		
 	}
 
 	@Override
@@ -47,8 +50,14 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public void deleteByItemid(int itemid) {
-		// TODO Auto-generated method stub
+	public void removeByProductId(int prodId) {
+
+		Session currentSession = entityManager.unwrap(Session.class);
+		Query theQuery = currentSession.createQuery("delete from Product where prodId=:prodId");
+		theQuery.setParameter("prodId",prodId);
+		
+		
+		theQuery.executeUpdate();
 		
 	}
 

@@ -12,6 +12,6 @@ public interface ProductService {
 	public List<Product> findAll();
 	public Product findById(int prodId);
 	public String save(Product product);
-	public void deleteById(int itemid);
-	public void updateFooditem(int itemid, Product product);
+	public void removeById(int productid);
+	public void updateProduct(int itemid, Product product);
 }

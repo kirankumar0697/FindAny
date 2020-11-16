@@ -27,10 +27,10 @@ private ProductDao productDao;
 		return productDao.findAll();
 	}
 
-	
+	@Transactional
 	public Product findById(int prodId) {
 		
-		return null;
+		return productDao.findByProductId(prodId);
 	}
 
 	@Transactional
@@ -40,14 +40,26 @@ private ProductDao productDao;
 		return "Product Added Successfully!";
 	}
 
-	public void deleteById(int itemid) {
-		// TODO Auto-generated method stub
+	public void updateProduct(int itemid, Product product) {
 		
+		if(productDao.findByProductId(itemid) == null) {
+			throw new NullPointerException("Item Not found");
+		} else {
+			System.out.println("first : " + product);
+			Product item = productDao.findByProductId(itemid);
+			item.setProdName(product.getProdName());
+			item.setCategory(product.getCategory());
+			item.setProdPrice(product.getProdPrice());
+			item.setDescription(product.getDescription());
+			System.out.println("updated: " + item);
+			productDao.save(item);
+		}
 	}
 
-	public void updateFooditem(int itemid, Product product) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public void removeById(int productid) {
 		
+		productDao.removeByProductId(productid);
 	}
 
 }

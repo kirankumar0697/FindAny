@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +21,7 @@ import com.psa.com.shoppingdemo.entity.Product;
  *
  */
 @RestController
-@CrossOrigin(origins = "http://13.235.71.80:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("/product")
 public class ProductController {
 
@@ -36,11 +39,29 @@ private ProductService productService;
 	}
 	
 	@PostMapping("/addproduct")
-	public Product addMenu(@RequestBody Product product) {
+	public Product addProduct(@RequestBody Product product) {
 		
 		String result = productService.save(product);
 		System.out.println(result);
 		return product;
 		
+	}
+	
+	@DeleteMapping("/remove/{prodId}")
+	public String removeProduct(@PathVariable int prodId)
+	{
+		Product tempProduct=productService.findById(prodId);
+		if(tempProduct==null) {
+			throw new RuntimeException("Item id not found " + prodId);
+		}
+		productService.removeById(prodId);
+		return "deleted item id " + prodId;
+	}
+	
+	@PutMapping("/update/{prodId}")
+	public Product updateMenu(@PathVariable int prodId, @RequestBody Product product) {
+		System.out.println("enter controller");
+		productService.updateProduct(prodId, product);
+		return product;
 	}
 }
