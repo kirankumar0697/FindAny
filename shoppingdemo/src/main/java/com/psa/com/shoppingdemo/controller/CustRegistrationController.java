@@ -17,6 +17,7 @@ import com.psa.com.shoppingdemo.entity.Customer;
  */
 
 @CrossOrigin(allowedHeaders = "*", origins = "http://localhost:4200/")
+@RequestMapping("/findany")
 @RestController
 public class CustRegistrationController {
 

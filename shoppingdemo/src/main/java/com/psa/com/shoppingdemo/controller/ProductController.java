@@ -20,9 +20,9 @@ import com.psa.com.shoppingdemo.entity.Product;
  * @author KIRANKUMAR NARARE
  *
  */
-@RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-@RequestMapping("/product")
+@RestController
+@RequestMapping("/findany")
 public class ProductController {
 
 private ProductService productService;
