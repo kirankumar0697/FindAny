@@ -34,6 +34,27 @@ public class Customer {
 	private String custpass;
 	@Column(length = 40)
 	private String custaddress;
+	
+	
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	public Customer(Long custid, String custname, String gender, long custmobileno, String custmail, String custpass,
+			String custaddress) {
+		super();
+		this.custid = custid;
+		this.custname = custname;
+		this.gender = gender;
+		this.custmobileno = custmobileno;
+		this.custmail = custmail;
+		this.custpass = custpass;
+		this.custaddress = custaddress;
+	}
+
+
 	public Long getCustid() {
 		return custid;
 	}
