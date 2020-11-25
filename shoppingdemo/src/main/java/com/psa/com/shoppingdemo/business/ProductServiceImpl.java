@@ -2,8 +2,12 @@ package com.psa.com.shoppingdemo.business;
 
 import java.util.List;
 import javax.transaction.Transactional;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.psa.com.shoppingdemo.controller.ProductController;
 import com.psa.com.shoppingdemo.dao.ProductDao;
 import com.psa.com.shoppingdemo.entity.Product;
 
@@ -14,6 +18,7 @@ import com.psa.com.shoppingdemo.entity.Product;
 @Service
 public class ProductServiceImpl implements ProductService{
 
+private static final Logger LOGGER = Logger.getLogger(ProductController.class);
 private ProductDao productDao;
 	
 	@Autowired
@@ -43,6 +48,7 @@ private ProductDao productDao;
 	public void updateProduct(int itemid, Product product) {
 		
 		if(productDao.findByProductId(itemid) == null) {
+			LOGGER.info("Item Not found");
 			throw new NullPointerException("Item Not found");
 		} else {
 			System.out.println("first : " + product);

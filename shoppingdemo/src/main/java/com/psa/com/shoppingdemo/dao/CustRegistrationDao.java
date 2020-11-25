@@ -13,4 +13,5 @@ import com.psa.com.shoppingdemo.entity.Customer;
  */
 public interface CustRegistrationDao extends CrudRepository<Customer, Long>{
 
+	Customer findByCustmail(String custmail);
 }

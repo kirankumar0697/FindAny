@@ -2,6 +2,7 @@ package com.psa.com.shoppingdemo.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +25,8 @@ import com.psa.com.shoppingdemo.entity.Product;
 @RestController
 @RequestMapping("/findany")
 public class ProductController {
+	
+	private static final Logger LOGGER = Logger.getLogger(ProductController.class);
 
 private ProductService productService;
 	
@@ -52,6 +55,7 @@ private ProductService productService;
 	{
 		Product tempProduct=productService.findById(prodId);
 		if(tempProduct==null) {
+			LOGGER.error("NullPointer exception");
 			throw new RuntimeException("Item id not found " + prodId);
 		}
 		productService.removeById(prodId);
